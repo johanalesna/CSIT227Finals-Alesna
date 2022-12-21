@@ -30,6 +30,27 @@ public class App extends JFrame{
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String name = tfName.getText();
+                int age = Integer.parseInt(tfAge.getText());
+
+                if(rbCustomer.isSelected()) {
+                    persons.add(new Person.Customer(name, age));
+                } else if (rbClerk.isSelected()) {
+                    int month = Integer.parseInt(tfMonths.getText());
+                    int salary = Integer.parseInt(tfSalary.getText());
+                    persons.add(new Person.Employee.Clerk(name, age, month, salary));
+
+                } else if (rbManager.isSelected()) {
+                    int month = Integer.parseInt(tfMonths.getText());
+                    int salary = Integer.parseInt(tfSalary.getText());
+                    persons.add(new Person.Employee.Manager(name, age, month, salary));
+                }
+            }
+        });
+
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
                 try {
 
@@ -67,6 +88,7 @@ public class App extends JFrame{
                 tfSalary.setText(null);
                 tfLoad.setText(null);
             }
+
             class AgeNegativeException extends Exception {
                 public AgeNegativeException(String s){
                     super(s);
